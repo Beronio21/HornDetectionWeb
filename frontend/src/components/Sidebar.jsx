@@ -15,6 +15,7 @@ import {
   Warning as WarningIcon,
   Logout as LogoutIcon,
   Info as InfoIcon,
+  Hearing as HearingIcon,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
@@ -63,6 +64,14 @@ const Sidebar = () => {
               <WarningIcon />
             </ListItemIcon>
             <ListItemText primary="Violations" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => navigate('/user/sound-detection')}>
+            <ListItemIcon sx={{ color: 'white' }}>
+              <HearingIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sound Detection" />
           </ListItemButton>
         </ListItem>
         {/* <ListItem disablePadding>

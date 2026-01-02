@@ -31,8 +31,13 @@ class ViolationController extends Controller
 
         $user = User::where('plate_number', $validated['plate_number'])->first();
 
+        // Allow creating violations for unknown plates (e.g., horn/noise events)
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            $customUserId = 0; // guest / unknown
+            $userName = 'Unknown';
+        } else {
+            $customUserId = $user->custom_id;
+            $userName = $user->name ?? 'Unknown';
         }
 
         $letterPath = null;
@@ -41,7 +46,7 @@ class ViolationController extends Controller
         }
 
         $violation = Violation::create([
-            'custom_user_id' => $user->custom_id,
+            'custom_user_id' => $customUserId,
             'plate_number' => $validated['plate_number'],
             'detected_at' => $validated['detected_at'],
             'speed' => $validated['speed'],
@@ -54,18 +59,21 @@ class ViolationController extends Controller
         $offenseCount = Violation::where('custom_user_id', $user->custom_id)->count();
         event(new ViolationCreated($violation, $offenseCount));
 
-        $user->notify(new RealTimeNotification([
-            'title' => 'Violation Notice',
-            'message' => "You have been flagged for a violation: " . ($validated['speed'] ? "Speeding" : "Noise"),
-            'url' => "/violations/{$violation->id}",
-            'custom_id' => $user->custom_id,
-        ]));
+        // Notify user if known
+        if ($user) {
+            $user->notify(new RealTimeNotification([
+                'title' => 'Violation Notice',
+                'message' => "You have been flagged for a violation: " . ($validated['speed'] ? "Speeding" : "Noise"),
+                'url' => "/violations/{$violation->id}",
+                'custom_id' => $user->custom_id,
+            ]));
+        }
 
         $admins = User::where('role', 'admin')->get();
         foreach ($admins as $admin) {
             $admin->notify(new RealTimeNotification([
                 'title' => 'New Violation Reported',
-                'message' => "A new violation has been reported by user: {$user->name}",
+                'message' => "A new violation has been reported" . ($user ? " by user: {$userName}" : " (unknown user)"),
                 'url' => "/admin/violations/{$violation->id}",
                 'custom_id' => $admin->custom_id,
             ]));

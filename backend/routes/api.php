@@ -60,3 +60,6 @@ Route::prefix('violations')->group(function () {
     Route::delete('/{id}', [ViolationController::class, 'destroy']);
 });
 
+// Detector-written JSON events (files) — used by Sound Detection UI when DB events are missing
+Route::get('/horn-events', [App\Http\Controllers\HornEventController::class, 'index'])->name('horn-events');
+

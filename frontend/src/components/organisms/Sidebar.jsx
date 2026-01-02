@@ -23,6 +23,7 @@ import {
   ChevronLeft as ChevronLeftIcon,
   Menu as MenuIcon,
   Help as HelpIcon,
+  Hearing as HearingIcon,
 } from "@mui/icons-material";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -53,12 +54,14 @@ const Sidebar = ({ open = true, onClose, role, title = "App", logo = "/img/logo.
     { text: 'Manage Violations', icon: <WarningIcon />, path: '/admin/violations' },
     { text: 'Manage Users', icon: <PeopleIcon />, path: '/admin/users' },
     { text: 'Reports', icon: <AssessmentIcon />, path: '/admin/reports' },
+    { text: 'Sound Detection', icon: <HearingIcon />, path: '/admin/sound-detection' },
     { text: 'Help', icon: <HelpIcon />, path: '/admin/help' },
   ];
 
   const userNavItems = [
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/user/dashboard' },
     { text: 'Violations', icon: <WarningIcon />, path: '/user/violations' },
+    { text: 'Sound Detection', icon: <HearingIcon />, path: '/user/sound-detection' },
     { text: 'Help', icon: <HelpIcon />, path: '/user/help' },
   ];
 

@@ -8,6 +8,7 @@ const Users = lazy(() => import("@/pages/admin/Users/Users"));
 const Vehicles = lazy(() => import("@/pages/admin/Vehicles/Vehicles"));
 const Violations = lazy(() => import("@/pages/admin/Violations/Violations"));
 const Reports = lazy(() => import("@/pages/admin/Reports/Reports"));
+const SoundDetection = lazy(() => import("@/pages/admin/SoundDetection/SoundDetection"));
 const ProfileEdit = lazy(() => import("@/pages/ProfileEdit"));
 const Help = lazy(() => import("@/pages/admin/Help/Help"));
 
@@ -72,6 +73,15 @@ const adminRoutes = [
     element={
       <React.Suspense fallback={<div>Loading...</div>}>
         <Help />
+      </React.Suspense>
+    }
+  />,
+  <Route
+    key="admin-sound-detection"
+    path="/admin/sound-detection"
+    element={
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <SoundDetection />
       </React.Suspense>
     }
   />,

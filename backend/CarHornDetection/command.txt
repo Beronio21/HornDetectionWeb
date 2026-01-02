@@ -1,0 +1,2 @@
+install: pip install -r requirements.txt
+command: python horn_detector_new.py
