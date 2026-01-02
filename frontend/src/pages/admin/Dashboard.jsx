@@ -185,7 +185,7 @@ const Dashboard = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
               <StatCard
-                title="Horn Detections"
+                title="Honk Detections"
                 value={loading ? "..." : stats.hornDetections}
                 icon={<HearingIcon fontSize="large" />}
                 color="info"

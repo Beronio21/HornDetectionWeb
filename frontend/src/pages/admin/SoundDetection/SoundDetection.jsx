@@ -94,7 +94,7 @@ const SoundDetection = () => {
         }}
       >
         <Typography variant="h4" sx={{ mb: 2, fontWeight: "bold" }}>
-          Sound Detection (Horn)
+          Sound Detection (Honk)
         </Typography>
 
         <Paper sx={{ p: 2, mb: 3 }}>
@@ -140,8 +140,8 @@ const SoundDetection = () => {
             onClose={() => setShowAlert(false)}
             anchorOrigin={{ vertical: "top", horizontal: "right" }}
           >
-            <Alert onClose={() => setShowAlert(false)} severity="info" sx={{ width: "100%" }}>
-              New horn detected{latestEvent ? ` — ${latestEvent._norm_plate || latestEvent.plate_number || 'N/A'}` : ''}
+              <Alert onClose={() => setShowAlert(false)} severity="info" sx={{ width: "100%" }}>
+              New honk detected{latestEvent ? ` — ${latestEvent._norm_plate || latestEvent.plate_number || 'N/A'}` : ''}
             </Alert>
           </Snackbar>
       </Box>
