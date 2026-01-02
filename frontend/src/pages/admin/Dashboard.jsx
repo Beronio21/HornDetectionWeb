@@ -14,6 +14,7 @@ import {
   Warning as WarningIcon,
   Speed as SpeedIcon,
   VolumeUp as VolumeUpIcon,
+  Hearing as HearingIcon,
 } from "@mui/icons-material";
 import Sidebar from "@/components/organisms/Sidebar";
 import Header from "@/components/organisms/Header";
@@ -35,6 +36,7 @@ const Dashboard = () => {
     totalViolations: 0,
     speedViolations: 0,
     noiseViolations: 0,
+    hornDetections: 0,
   });
   const [loading, setLoading] = useState(true);
 
@@ -72,12 +74,17 @@ const Dashboard = () => {
           (v) => v.decibel_level && v.decibel_level > 85
         ).length;
 
+        const hornDetections = filteredViolations.filter(
+          (v) => v.source === "horn_detector" || (v.decibel_level && v.decibel_level > 0)
+        ).length;
+
         setStats({
           todayViolations,
           totalUsers: userData.length,
           totalViolations: filteredViolations.length,
           speedViolations,
           noiseViolations,
+          hornDetections,
         });
       } catch (error) {
         console.error("Error fetching dashboard stats:", error);
@@ -173,6 +180,14 @@ const Dashboard = () => {
                 title="Noise Violations"
                 value={loading ? "..." : stats.noiseViolations}
                 icon={<VolumeUpIcon fontSize="large" />}
+                color="info"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <StatCard
+                title="Horn Detections"
+                value={loading ? "..." : stats.hornDetections}
+                icon={<HearingIcon fontSize="large" />}
                 color="info"
               />
             </Grid>
