@@ -10,6 +10,7 @@ from datetime import datetime
 import uuid
 from pathlib import Path
 import random
+import os
 
 
 class HornDetector:
@@ -158,7 +159,14 @@ class HornDetector:
                                     # Use the best match for event meta
                                     best = detected_matches[0]
                                     # Create a realistic-looking event payload so backend accepts it
-                                    generated_plate = f"UNKNOWN-{uuid.uuid4().hex[:6].upper()}"
+                                    # Allow overriding the plate for testing via HORN_TEST_PLATE env var
+                                    test_plate = os.getenv("HORN_TEST_PLATE")
+                                    if test_plate:
+                                        generated_plate = test_plate
+                                        print(
+                                            f"Using test plate override: {generated_plate}")
+                                    else:
+                                        generated_plate = f"UNKNOWN-{uuid.uuid4().hex[:6].upper()}"
                                     event = {
                                         "custom_user_id": "0",
                                         "detected_at": datetime.now().isoformat(),
