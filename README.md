@@ -42,7 +42,9 @@ prediction_model/run_full_predictions.py -> add camera IP as cv2.videoCapture() 
 frontend/.env-> add local machine IP to as BASE_URL
 
 frontend/.env -> add local machine IP to .env file as VITE_RTSP_STREAM_ADDRESS:8889
+
 ### 1. Laravel Backend
+
 ```bash
 cd backend
 cp .env.example .env
@@ -50,12 +52,14 @@ composer install
 php artisan key:generate
 php artisan migrate
 php artisan serve --host=0.0.0.0 --port=8000  # or use Herd if installed
+php artisan serve --host=0.0.0.0 --port=8000
 ```
 
 > Note: Ensure MongoDB credentials are correctly set in `.env`.
 > use env.example as a starting point!
 
 ### 2. React Frontend
+
 ```bash
 cd frontend
 npm install
@@ -63,6 +67,7 @@ npm run dev
 ```
 
 ### 3. Python YOLO Model
+
 ```bash
 source ~/yolov11-env/bin/activate
 pip install opencv-python numpy ultralytics easyocr
@@ -73,12 +78,14 @@ python video_based_predictions.py #run the script on a video file and write resu
 ```
 
 ### 4. Node.js Violation Logger
+
 ```bash
 cd violation_logging/
 node upload_report.js
 ```
 
 ### 5. WebRTC Stream
+
 ```bash
 mediamtx
 ```
@@ -91,25 +98,28 @@ Logs are written to `.log` files silently.
 
 ## 👥 User Roles
 
-| Role  | Access                                                |
-|-------|--------------------------------------------------------|
-| Admin | Full dashboard access, manage users, view violations  |
-| User  | Limited access, view personal violations only         |
+| Role  | Access                                               |
+| ----- | ---------------------------------------------------- |
+| Admin | Full dashboard access, manage users, view violations |
+| User  | Limited access, view personal violations only        |
 
 ---
 
 ## 🌐 API Endpoints (Sample)
 
 ### Auth
+
 - `POST /register`
 - `POST /login`
 - `POST /logout`
 
 ### User Management
+
 - `GET /admin/user` (admin only)
 - `GET /user/profile` (user only)
 
 ### Violations
+
 - `GET /violations`
 - `GET /violations/{id}`
 - `POST /violations`
@@ -151,4 +161,3 @@ SESSION_DOMAIN=localhost
 ## 🚧 Disclaimer
 
 This system is currently under active development and intended for demo and testing purposes only. It is not yet ready for production use. Features and functionalities may change without notice.
-

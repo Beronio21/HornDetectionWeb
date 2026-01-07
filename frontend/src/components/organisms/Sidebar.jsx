@@ -61,7 +61,6 @@ const Sidebar = ({ open = true, onClose, role, title = "App", logo = "/img/logo.
   const userNavItems = [
     { text: 'Dashboard', icon: <DashboardIcon />, path: '/user/dashboard' },
     { text: 'Violations', icon: <WarningIcon />, path: '/user/violations' },
-    { text: 'Sound Detection', icon: <HearingIcon />, path: '/user/sound-detection' },
     { text: 'Help', icon: <HelpIcon />, path: '/user/help' },
   ];
 
