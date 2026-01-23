@@ -258,7 +258,7 @@ if __name__ == "__main__":
     detector = HornDetector(
         horn_folder="horn",
         sample_rate=22050,
-        threshold=0.65
+        threshold=0.70
     )
 
     # Start detection
